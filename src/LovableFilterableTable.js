@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 
-import "./FilterableTable.css";
+import "./LovableFilterableTable.css";
 
 const isLovedStyle = {
   backgroundColor: "rgba(255, 182, 193, 0.02)"
@@ -27,7 +27,7 @@ const filterMatches = (filter, items) => {
   });
 };
 
-class FilterableTable extends Component {
+class LovableFilterableTable extends Component {
   constructor(props) {
     super(props);
 
@@ -58,7 +58,7 @@ class FilterableTable extends Component {
     const { filter, matches } = this.state;
 
     return (
-      <div className="FilterableTable">
+      <div className="LovableFilterableTable">
         <div className="row">
           <table>
             <thead>
@@ -86,18 +86,20 @@ class FilterableTable extends Component {
             </thead>
             <tbody>
               {matches.map(item => {
-                const values = keys.map(key => item[key]);
                 const heartClass = item.isLoved
                   ? "fa fa-heart"
                   : "fa fa-heart-o";
                 return (
                   <tr style={item.isLoved ? isLovedStyle : {}} key={item.id}>
-                    {values.map((value, idx) =>
-                      <td key={idx} style={tdStyle}>
-                        {value}
-                      </td>
-                    )}
-                    <td>
+                    {keys.map(key => {
+                      const value = item[key];
+                      return (
+                        <td key={key} className={`item-${key}`} style={tdStyle}>
+                          {value}
+                        </td>
+                      );
+                    })}
+                    <td className="item-heart">
                       {
                         <i
                           className={heartClass}
@@ -117,4 +119,4 @@ class FilterableTable extends Component {
   }
 }
 
-export default FilterableTable;
+export default LovableFilterableTable;

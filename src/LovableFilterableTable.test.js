@@ -1,20 +1,20 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import FilterableTable from "./FilterableTable";
+import LovableFilterableTable from "./LovableFilterableTable";
 import { COLUMNS } from "./App.js";
 import { shallow } from "enzyme";
 
-xdescribe("FitlerableTable", () => {
+xdescribe("LovableFilterableTable", () => {
   let wrapper;
 
   it("renders without crashing", () => {
     const div = document.createElement("div");
-    ReactDOM.render(<FilterableTable columns={COLUMNS} items={[]} />, div);
+    ReactDOM.render(<LovableFilterableTable columns={COLUMNS} items={[]} />, div);
   });
 
   describe("when given empty set of items", () => {
     beforeEach(() => {
-      wrapper = shallow(<FilterableTable columns={COLUMNS} items={[]} />);
+      wrapper = shallow(<LovableFilterableTable columns={COLUMNS} items={[]} />);
     });
 
     it("should still render the `input` element", () => {
@@ -44,7 +44,7 @@ xdescribe("FitlerableTable", () => {
     ];
 
     beforeEach(() => {
-      wrapper = shallow(<FilterableTable columns={COLUMNS} items={items} />);
+      wrapper = shallow(<LovableFilterableTable columns={COLUMNS} items={items} />);
     });
 
     xit("should render some `tr` elements", () => {

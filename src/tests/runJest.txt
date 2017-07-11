@@ -31,7 +31,7 @@ const config = {
       "react-scripts/config/jest/babelTransform.js"
     )
   },
-  testMatch: ["<rootDir>/src/versions/**/FilterableTable**"],
+  testMatch: ["<rootDir>/src/versions/**/LovableFilterableTable**"],
   testEnvironment: "node"
 };
 

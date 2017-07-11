@@ -9,7 +9,7 @@ const tdStyle = {
   padding: "5px"
 };
 
-const LoveableRow = ({ values, isLoved, onHeartClick }) => {
+const LovableRow = ({ values, isLoved, onHeartClick }) => {
   const heartClass = isLoved ? "fa fa-heart" : "fa fa-heart-o";
 
   return (
@@ -26,4 +26,4 @@ const LoveableRow = ({ values, isLoved, onHeartClick }) => {
   );
 };
 
-export default LoveableRow;
+export default LovableRow;

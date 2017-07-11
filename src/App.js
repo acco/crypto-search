@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import "./App.css";
 import loadingRing from "./loading-ring.svg";
 
-import FilterableTable from "./FilterableTable";
+import LovableFilterableTable from "./LovableFilterableTable";
 
 export const tableSchema = {
   name: "Name",
@@ -102,7 +102,7 @@ class App extends Component {
       <div className="container">
         <div className="CryptoTable">
           <ContentWithLoadingIndicator loaded={loaded}>
-            <FilterableTable
+            <LovableFilterableTable
               schema={tableSchema}
               items={coins}
               onHeartClick={this.handleHeartClick}
@@ -115,3 +115,92 @@ class App extends Component {
 }
 
 export default App;
+
+// const localStorageKey = "crypto-search:loves";
+
+// class App extends Component {
+//   constructor(props) {
+//     super(props);
+
+//     this.state = {
+//       coins: [],
+//       loves: [],
+//       loaded: false
+//     };
+
+//     if (window && window.localStorage) {
+//       const stored = window.localStorage.getItem(localStorageKey);
+//       if (stored) {
+//         this.state.loves = JSON.parse(stored);
+//       }
+//     }
+//   }
+
+//   storeLoveInLocalStorage(id) {
+//     if (window && window.localStorage) {
+//       let json = [];
+
+//       const stored = window.localStorage.getItem(localStorageKey);
+//       if (stored) {
+//         json = JSON.parse(stored);
+//       }
+
+//       json.push(id);
+//       window.localStorage.setItem(localStorageKey, JSON.stringify(json));
+//     }
+//   }
+
+//   handleHeartClick = id => {
+//     this.setState(prevState => {
+//       const prevLoves = prevState.loves;
+//       if (prevLoves.find(i => i === id)) {
+//         return {
+//           loves: prevLoves.filter(i => i !== id)
+//         };
+//       } else {
+//         return {
+//           loves: prevLoves.concat(id)
+//         };
+//       }
+//     });
+//   };
+
+//   fetchCoins = () => {
+//     fetch(API_URL).then(parseJSON).then(top100 =>
+//       this.setState({
+//         coins: top100,
+//         loaded: true
+//       })
+//     );
+//   };
+
+//   componentDidMount() {
+//     this.fetchCoins();
+//     setInterval(this.fetchCoins, 10000);
+//   }
+
+//   render() {
+//     const { loves, loaded } = this.state;
+
+//     const coins = this.state.coins.map(coin => ({
+//       ...coin,
+//       isLoved: loves.find(id => id === coin.id)
+//     }));
+
+//     return (
+//       <div className="container">
+//         <div className="CryptoTable">
+//           <ContentWithLoadingIndicator loaded={loaded}>
+//             <LovableFilterableTable
+//               schema={tableSchema}
+//               items={coins}
+//               onHeartClick={this.handleHeartClick}
+//             />
+//           </ContentWithLoadingIndicator>
+//         </div>
+//       </div>
+//     );
+//   }
+// }
+
+// export default App;

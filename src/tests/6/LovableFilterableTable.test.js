@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import FilterableTable from "../../FilterableTable";
+import LovableFilterableTable from "../../LovableFilterableTable";
 import { shallow } from "enzyme";
 import { tableSchema } from "../../App";
 
@@ -19,19 +19,19 @@ const generateItems = () => {
   }));
 };
 
-describe("FitlerableTable", () => {
+xdescribe("LovableFilterableTable", () => {
   let wrapper;
 
   xit("renders without crashing", () => {
     let items = ["bitcoin", "ethereum"];
-    let onItemClick = () => {};
+    let onItemLoved = () => {};
 
     const div = document.createElement("div");
     ReactDOM.render(
-      <FilterableTable
+      <LovableFilterableTable
         schema={tableSchema}
         items={items}
-        onItemClick={onItemClick}
+        onItemLoved={onItemLoved}
       />,
       div
     );
@@ -45,7 +45,9 @@ describe("FitlerableTable", () => {
     ];
 
     beforeEach(() => {
-      wrapper = shallow(<FilterableTable schema={tableSchema} items={items} />);
+      wrapper = shallow(
+        <LovableFilterableTable schema={tableSchema} items={items} />
+      );
     });
 
     it("should render some `tr` elements", () => {
@@ -74,7 +76,9 @@ describe("FitlerableTable", () => {
 
     beforeEach(() => {
       items = generateItems();
-      wrapper = shallow(<FilterableTable items={items} schema={tableSchema} />);
+      wrapper = shallow(
+        <LovableFilterableTable items={items} schema={tableSchema} />
+      );
 
       const searchBox = wrapper.find("input");
       searchBox.simulate("change", { target: { value: "coin" } });
@@ -105,6 +109,82 @@ describe("FitlerableTable", () => {
           )
         ).toBe(false);
       });
+    });
+
+    it("should render a subset of matching `items`", () => {
+      expect(wrapper.find("tbody").first().html()).toMatchSnapshot();
+    });
+
+    it("should filter items", () => {
+      expect(
+        wrapper.find("tbody > tr > .item-name").map(i => i.html())
+      ).toMatchSnapshot();
+    });
+
+    describe("user keeps typing", () => {
+      let items;
+
+      beforeEach(() => {
+        items = generateItems();
+        wrapper = shallow(
+          <LovableFilterableTable items={items} schema={tableSchema} />
+        );
+
+        const searchBox = wrapper.find("input");
+        searchBox.simulate("change", { target: { value: "coind" } });
+      });
+
+      it("should filter items", () => {
+        expect(
+          wrapper.find("tbody > tr > .item-name").map(i => i.html())
+        ).toMatchSnapshot();
+      });
+    });
+  });
+
+  describe("user interaction w strawmen", () => {
+    let items;
+
+    beforeEach(() => {
+      items = generateItems();
+      wrapper = shallow(
+        <LovableFilterableTable items={items} schema={tableSchema} />
+      );
+
+      wrapper.instance().updateFilter("coin", items);
+      // wrapper.update();
+    });
+
+    it("should filter items", () => {
+      expect(
+        wrapper.find("tbody > tr > .item-name").map(i => i.html())
+      ).toMatchSnapshot();
+    });
+
+    it("should update the state", () => {
+      expect(wrapper.state("matches").map(m => m.name)).toMatchSnapshot();
+    });
+  });
+
+  describe("user interaction w strawman 2", () => {
+    let items;
+
+    beforeEach(() => {
+      items = generateItems();
+      wrapper = shallow(
+        <LovableFilterableTable items={items} schema={tableSchema} />
+      );
+
+      const matchingItems = items.slice(0, 3);
+
+      wrapper.setState({ matches: matchingItems });
+      // wrapper.update();
+    });
+
+    it("should filter items", () => {
+      expect(
+        wrapper.find("tbody > tr > .item-name").map(i => i.html())
+      ).toMatchSnapshot();
     });
   });
 });
