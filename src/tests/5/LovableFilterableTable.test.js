@@ -27,11 +27,11 @@ describe("LovableFilterableTable", () => {
       );
     });
 
-    it("when given empty `items`, should still render search box", () => {
+    it("should still render search box", () => {
       expect(wrapper.find("input").exists()).toBe(true);
     });
 
-    it("when given empty `items`, should still render search box", () => {
+    it("should have no table rows", () => {
       expect(wrapper.find("tbody > tr").exists()).toBe(false);
     });
   });

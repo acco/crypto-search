@@ -95,31 +95,19 @@ describe("LovableFilterableTable", () => {
       searchBox.simulate("change", { target: { value: "coin" } });
     });
 
-    it("should render a subset of matching `items`", () => {
-      const matching = items.filter(i => i.name.match(/coin/i));
-
-      matching.forEach(match => {
-        expect(
-          wrapper.containsMatchingElement(
-            <td>
-              {match.name}
-            </td>
-          )
-        ).toBe(true);
-      });
+    it("testing out snapshots", () => {
+      const item = items[0];
+      expect(item).toMatchSnapshot();
     });
-    it("should not render the `items` that don't match", () => {
-      const notMatching = items.filter(i => !i.name.match(/coin/i));
 
-      notMatching.forEach(match => {
-        expect(
-          wrapper.containsMatchingElement(
-            <td>
-              {match.name}
-            </td>
-          )
-        ).toBe(false);
-      });
+    it("should render a subset of matching `items`", () => {
+      expect(wrapper.find("tbody").first().html()).toMatchSnapshot();
+    });
+
+    it("should filter items", () => {
+      expect(
+        wrapper.find("tbody > tr > .item-name").map(i => i.html())
+      ).toMatchSnapshot();
     });
   });
 });

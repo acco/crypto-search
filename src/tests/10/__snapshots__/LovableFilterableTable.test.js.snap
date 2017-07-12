@@ -1,0 +1,348 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`LovableFilterableTable user enters search query should filter items 1`] = `
+Array [
+  "Bitcoin",
+  "Litecoin",
+  "Siacoin",
+  "Bytecoin",
+  "Dogecoin",
+  "MaidSafeCoin",
+]
+`;
+
+exports[`LovableFilterableTable when given empty \`items\` should render an empty table 1`] = `
+<div
+  className="LovableFilterableTable"
+>
+  <div
+    className="row"
+  >
+    <table>
+      <thead>
+        <tr>
+          <td>
+            <label
+              htmlFor="filterField"
+            >
+              Filter
+            </label>
+            <input
+              id="filterField"
+              onChange={[Function]}
+              placeholder="Filter..."
+              style={
+                Object {
+                  "minWidth": "300px",
+                }
+              }
+              type="text"
+              value=""
+            />
+          </td>
+        </tr>
+        <tr>
+          <th>
+            Name
+          </th>
+          <th>
+            Symbol
+          </th>
+          <th>
+            Price ($)
+          </th>
+          <th>
+            % Change (1h)
+          </th>
+          <th>
+            % Change (24h)
+          </th>
+          <th>
+            % Change (7d)
+          </th>
+          <th />
+        </tr>
+      </thead>
+      <tbody />
+    </table>
+  </div>
+</div>
+`;
+
+exports[`LovableFilterableTable when given some \`items\` should render each item in the table 1`] = `
+<div
+  className="LovableFilterableTable"
+>
+  <div
+    className="row"
+  >
+    <table>
+      <thead>
+        <tr>
+          <td>
+            <label
+              htmlFor="filterField"
+            >
+              Filter
+            </label>
+            <input
+              id="filterField"
+              onChange={[Function]}
+              placeholder="Filter..."
+              style={
+                Object {
+                  "minWidth": "300px",
+                }
+              }
+              type="text"
+              value=""
+            />
+          </td>
+        </tr>
+        <tr>
+          <th>
+            Name
+          </th>
+          <th>
+            Symbol
+          </th>
+          <th>
+            Price ($)
+          </th>
+          <th>
+            % Change (1h)
+          </th>
+          <th>
+            % Change (24h)
+          </th>
+          <th>
+            % Change (7d)
+          </th>
+          <th />
+        </tr>
+      </thead>
+      <tbody>
+        <tr
+          style={Object {}}
+        >
+          <td
+            className="item-name"
+            style={
+              Object {
+                "padding": "5px",
+              }
+            }
+          >
+            Bitcoin
+          </td>
+          <td
+            className="item-symbol"
+            style={
+              Object {
+                "padding": "5px",
+              }
+            }
+          >
+            BTC
+          </td>
+          <td
+            className="item-price_usd"
+            style={
+              Object {
+                "padding": "5px",
+              }
+            }
+          >
+            2717.71
+          </td>
+          <td
+            className="item-percent_change_1h"
+            style={
+              Object {
+                "padding": "5px",
+              }
+            }
+          >
+            0.13
+          </td>
+          <td
+            className="item-percent_change_24h"
+            style={
+              Object {
+                "padding": "5px",
+              }
+            }
+          >
+            0.17
+          </td>
+          <td
+            className="item-percent_change_7d"
+            style={
+              Object {
+                "padding": "5px",
+              }
+            }
+          >
+            17.38
+          </td>
+          <td
+            className="item-heart"
+          >
+            <i
+              aria-hidden="true"
+              className="fa fa-heart-o"
+              onClick={[Function]}
+            />
+          </td>
+        </tr>
+        <tr
+          style={Object {}}
+        >
+          <td
+            className="item-name"
+            style={
+              Object {
+                "padding": "5px",
+              }
+            }
+          >
+            Ethereum
+          </td>
+          <td
+            className="item-symbol"
+            style={
+              Object {
+                "padding": "5px",
+              }
+            }
+          >
+            ETH
+          </td>
+          <td
+            className="item-price_usd"
+            style={
+              Object {
+                "padding": "5px",
+              }
+            }
+          >
+            339.726
+          </td>
+          <td
+            className="item-percent_change_1h"
+            style={
+              Object {
+                "padding": "5px",
+              }
+            }
+          >
+            0.13
+          </td>
+          <td
+            className="item-percent_change_24h"
+            style={
+              Object {
+                "padding": "5px",
+              }
+            }
+          >
+            1.08
+          </td>
+          <td
+            className="item-percent_change_7d"
+            style={
+              Object {
+                "padding": "5px",
+              }
+            }
+          >
+            4.95
+          </td>
+          <td
+            className="item-heart"
+          >
+            <i
+              aria-hidden="true"
+              className="fa fa-heart-o"
+              onClick={[Function]}
+            />
+          </td>
+        </tr>
+        <tr
+          style={Object {}}
+        >
+          <td
+            className="item-name"
+            style={
+              Object {
+                "padding": "5px",
+              }
+            }
+          >
+            Ripple
+          </td>
+          <td
+            className="item-symbol"
+            style={
+              Object {
+                "padding": "5px",
+              }
+            }
+          >
+            XRP
+          </td>
+          <td
+            className="item-price_usd"
+            style={
+              Object {
+                "padding": "5px",
+              }
+            }
+          >
+            0.299428
+          </td>
+          <td
+            className="item-percent_change_1h"
+            style={
+              Object {
+                "padding": "5px",
+              }
+            }
+          >
+            0.38
+          </td>
+          <td
+            className="item-percent_change_24h"
+            style={
+              Object {
+                "padding": "5px",
+              }
+            }
+          >
+            -3.25
+          </td>
+          <td
+            className="item-percent_change_7d"
+            style={
+              Object {
+                "padding": "5px",
+              }
+            }
+          >
+            18.88
+          </td>
+          <td
+            className="item-heart"
+          >
+            <i
+              aria-hidden="true"
+              className="fa fa-heart-o"
+              onClick={[Function]}
+            />
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+`;

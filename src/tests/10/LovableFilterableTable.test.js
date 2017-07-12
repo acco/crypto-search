@@ -10,15 +10,18 @@ import path from "path";
 
 const SAMPLE_RESPONSE_FILE = path.join(__dirname, "../../sample-data.json");
 
-const generateItems = () => {
+const generateItems = (n = 30) => {
   const response = fs.readFileSync(SAMPLE_RESPONSE_FILE);
   const json = JSON.parse(response);
 
-  return json.slice(0, 30).map(item => ({
+  return json.slice(0, n).map(item => ({
     ...item,
     isLoved: false
   }));
 };
+
+import serializer from "jest-serializer-enzyme";
+expect.addSnapshotSerializer(serializer);
 
 describe("LovableFilterableTable", () => {
   let wrapper;
@@ -42,43 +45,21 @@ describe("LovableFilterableTable", () => {
       );
     });
 
-    it("should still render search box", () => {
-      expect(wrapper.find("input").exists()).toBe(true);
-    });
-
-    it("should have no table rows", () => {
-      expect(wrapper.find("tbody > tr").exists()).toBe(false);
+    it("should render an empty table", () => {
+      expect(wrapper).toMatchSnapshot();
     });
   });
 
   describe("when given some `items`", () => {
-    // Presence in this array does not indicate endorsement
-    const items = [
-      { id: 1, name: "Bitcoin" },
-      { id: 2, name: "Ethereum" },
-      { id: 3, name: "Litecoin" }
-    ];
-
     beforeEach(() => {
+      const items = generateItems(3);
       wrapper = shallow(
         <LovableFilterableTable items={items} schema={tableSchema} />
       );
     });
 
-    it("should render corresponding number of table rows", () => {
-      expect(wrapper.find("tbody > tr").length).toEqual(3);
-    });
-
-    it("should include the title of each item", () => {
-      items.forEach(item => {
-        expect(
-          wrapper.containsMatchingElement(
-            <td>
-              {item.name}
-            </td>
-          )
-        ).toBe(true);
-      });
+    it("should render each item in the table", () => {
+      expect(wrapper).toMatchSnapshot();
     });
   });
 
@@ -95,30 +76,20 @@ describe("LovableFilterableTable", () => {
       searchBox.simulate("change", { target: { value: "coin" } });
     });
 
-    it("should render a subset of matching `items`", () => {
-      const matching = items.filter(i => i.name.match(/coin/i));
-
-      matching.forEach(match => {
-        expect(
-          wrapper.containsMatchingElement(
-            <td>
-              {match.name}
-            </td>
-          )
-        ).toBe(true);
-      });
+    it("should filter items", () => {
+      expect(
+        wrapper.find("tbody > tr > .item-name").map(n => n.text())
+      ).toMatchSnapshot();
     });
-    it("should not render the `items` that don't match", () => {
-      const notMatching = items.filter(i => !i.name.match(/coin/i));
 
-      notMatching.forEach(match => {
-        expect(
-          wrapper.containsMatchingElement(
-            <td>
-              {match.name}
-            </td>
-          )
-        ).toBe(false);
+    describe("user clears search query", () => {
+      beforeEach(() => {
+        const searchBox = wrapper.find("input");
+        searchBox.simulate("change", { target: { value: "" } });
+      });
+
+      it("should render all the items again", () => {
+        expect(wrapper.find("tbody > tr").length).toEqual(items.length);
       });
     });
   });
